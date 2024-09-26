@@ -71,7 +71,7 @@ function desenharBoneco(tentativasRestantes) {
         corpo.style.bottom = "50px"; 
         corpo.style.left = "50%";
         corpo.style.transform = "translateX(-50%)";
-        corpo.style.width = "2px";
+        corpo.style.width = "5px";
         corpo.style.height = "60px";
         corpo.style.backgroundColor = "black";
         forca.appendChild(corpo);
@@ -85,7 +85,7 @@ function desenharBoneco(tentativasRestantes) {
         bracoEsquerdo.style.left = "50%";
         bracoEsquerdo.style.transform = "translateX(-25px) rotate(-45deg)";
         bracoEsquerdo.style.width = "30px";
-        bracoEsquerdo.style.height = "2px";
+        bracoEsquerdo.style.height = "5px";
         bracoEsquerdo.style.backgroundColor = "black";
         forca.appendChild(bracoEsquerdo);
     }
@@ -98,7 +98,7 @@ function desenharBoneco(tentativasRestantes) {
         bracoDireito.style.left = "35%";
         bracoDireito.style.transform = "translateX(25px) rotate(45deg)";
         bracoDireito.style.width = "30px";
-        bracoDireito.style.height = "2px";
+        bracoDireito.style.height = "5px";
         bracoDireito.style.backgroundColor = "black";
         forca.appendChild(bracoDireito);
     }
@@ -111,7 +111,7 @@ function desenharBoneco(tentativasRestantes) {
         pernaEsquerda.style.left = "50%";
         pernaEsquerda.style.transform = "translateX(-25px) rotate(-45deg)";
         pernaEsquerda.style.width = "30px";
-        pernaEsquerda.style.height = "2px";
+        pernaEsquerda.style.height = "5px";
         pernaEsquerda.style.backgroundColor = "black";
         forca.appendChild(pernaEsquerda);
     }
@@ -124,7 +124,7 @@ function desenharBoneco(tentativasRestantes) {
         pernaDireita.style.left = "35%";
         pernaDireita.style.transform = "translateX(25px) rotate(45deg)";
         pernaDireita.style.width = "30px";
-        pernaDireita.style.height = "2px";
+        pernaDireita.style.height = "5px";
         pernaDireita.style.backgroundColor = "black";
         forca.appendChild(pernaDireita);
     }

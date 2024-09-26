@@ -12,13 +12,15 @@ function iniciarJogo() {
     tentativasRestantes = tentativasMaximas;
     atualizarDisplayDoJogo();
     desenharBoneco(tentativasRestantes); 
+    document.getElementById("guess").disabled = false;
+    document.getElementById("submitGuess").disabled = false;
 }
 
 function atualizarDisplayDoJogo() {
     let palavraExibida = "";
     for (let i = 0; i < palavraAtual.length; i++) {
         const letra = palavraAtual[i];
-        if (letrasAdivinhadas.includes(letra) || letra === " ") {
+        if (letrasAdivinhadas.includes(normalizarLetra(letra)) || letra === " ") {
             palavraExibida += letra;
         } else {
             palavraExibida += "_";
@@ -31,34 +33,47 @@ function atualizarDisplayDoJogo() {
     document.getElementById("attempts").textContent = `Letras já tentadas: ${letrasAdivinhadas.join(", ")}`;
 }
 
+function encerrarJogo() {
+    document.getElementById("guess").disabled = true;
+    document.getElementById("submitGuess").disabled = true;
+}
+
 function adivinharLetra() {
     const entradaAdivinhacao = document.getElementById("guess");
-    const letraAdivinhada = entradaAdivinhacao.value.toLowerCase();
+    let letraAdivinhada = entradaAdivinhacao.value;
 
-    if (letraAdivinhada.length === 1 && /^[a-záéíóúãõç\s]$/.test(letraAdivinhada)) {
+    letraAdivinhada = normalizarLetra(letraAdivinhada);
+
+    if (letraAdivinhada.length === 1 && /^[a-z\s]$/.test(letraAdivinhada)) {
         if (!letrasAdivinhadas.includes(letraAdivinhada)) {
             letrasAdivinhadas.push(letraAdivinhada);
 
-            if (!palavraAtual.includes(letraAdivinhada)) {
+            if (!palavraAtual.split('').some(letra => normalizarLetra(letra) === letraAdivinhada)) {
                 tentativasRestantes--;
             }
 
             atualizarDisplayDoJogo();
             desenharBoneco(tentativasRestantes);
 
-            if (palavraAtual.split('').every(letra => letrasAdivinhadas.includes(letra) || letra === " ")) {
+            if (palavraAtual.split('').every(letra => letrasAdivinhadas.includes(normalizarLetra(letra)) || letra === " ")) {
                 document.getElementById("status").textContent = "Você venceu!";
-                bloquearInput();
+                encerrarJogo();
+
             } else if (tentativasRestantes <= 0) {
                 document.getElementById("status").textContent = `Você perdeu! A palavra era: ${palavraAtual}`;
-                bloquearInput();
+                encerrarJogo();
             }
+        
         }
     } else {
         alert("Por favor, insira uma letra válida.");
     }
 
     entradaAdivinhacao.value = "";
+}
+
+function normalizarLetra(letra) {
+    return letra.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 }
 
 document.addEventListener("DOMContentLoaded", iniciarJogo);
